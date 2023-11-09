@@ -1,10 +1,16 @@
+<router-outlet></router-outlet>
 <h1 style="text-align: center; margin: 50px 0px">Table of products</h1>
 
 <nz-table #dummyTable [nzData]="productsList">
   <thead>
     <tr>
       <th [nzAlign]="'center'" nzWidth="100px"></th>
-      <th [nzAlign]="'center'">STT</th>
+      <th
+        *ngFor="let column of columns"
+        [nzAlign]="column.alignment"
+        [nzWidth]="column.columnWidth"
+      ></th>
+      <!-- <th [nzAlign]="'center'">STT</th>
       <th [nzAlign]="'center'" nzWidth="100px">Tên sản phẩm</th>
       <th [nzAlign]="'center'">Thương hiệu</th>
       <th [nzAlign]="'center'" nzWidth="300px">Mô tả</th>
@@ -13,7 +19,7 @@
       <th [nzAlign]="'center'">Đánh giá</th>
       <th [nzAlign]="'center'">Tồn kho</th>
       <th [nzAlign]="'center'">Giảm giá</th>
-      <th [nzAlign]="'center'">Ảnh mẫu</th>
+      <th [nzAlign]="'center'">Ảnh mẫu</th> -->
     </tr>
   </thead>
   <tbody>

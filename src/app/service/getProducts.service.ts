@@ -12,6 +12,8 @@ export class GetProductsService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiEndpoint);
+    return this.http.get<Product[]>(END_POINT);
   }
 }
+
+const END_POINT: string = 'https://dummyjson.com/products';

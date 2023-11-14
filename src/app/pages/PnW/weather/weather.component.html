@@ -1,0 +1,37 @@
+<div class="weather-container">
+  <form [formGroup]="form">
+    <nz-select class="selectLang" formControlName="lang" [nzSize]="'large'">
+      <nz-option
+        *ngFor="let lang of listOfLang"
+        [nzLabel]="lang.label"
+        [nzValue]="lang.value"
+      ></nz-option>
+    </nz-select>
+
+    <div class="content">
+      <input
+        nz-input
+        [nzSize]="'large'"
+        type="text"
+        formControlName="search"
+        (keydown.enter)="onUpdateCity($event)"
+      />
+
+      <div class="modal">
+        <ng-container *ngIf="weatherInfor">
+          <div>
+            <h1>{{ weatherInfor.name }}, {{ weatherInfor.sys.country }}</h1>
+            <h2>Mô tả: {{ weatherInfor.weather[0].description }}</h2>
+            <h2>
+              Nhiệt độ hiện tại:
+              {{ weatherInfor.main.temp | kelvinToCelsius | number : ".1" }}°C
+            </h2>
+            <h2>Độ ẩm: {{ weatherInfor.main.humidity }}%</h2>
+            <h2>Tốc độ gió: {{ weatherInfor.wind.speed }}km/h</h2>
+          </div>
+          <div><img [src]="getIconUrl()" alt="" /></div>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+</div>

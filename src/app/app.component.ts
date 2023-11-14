@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetProductsService } from './service/getProducts.service';
-import { Product } from 'src/app/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,34 +7,23 @@ import { Product } from 'src/app/product';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  expandSet: Set<number>;
+  constructor(private router: Router) {}
 
-  columns: {
-    columnName: string;
-    columnWidth: string;
-    alignment: 'center' | 'left' | 'right' | null;
-  }[] = [{ columnName: 'STT', columnWidth: '100px', alignment: 'center' }];
-  onExpandChange(id: number, checked: boolean) {
-    if (checked) {
-      this.expandSet.add(id);
-    } else {
-      this.expandSet.delete(id);
+  ngOnInit(): void {}
+  /**
+   *
+   * @param type 1 is product app, 2 is weather app
+   */
+  navigateTo(type: number) {
+    switch (type) {
+      case 1: {
+        this.router.navigate(['/products-app']);
+        break;
+      }
+      case 2: {
+        this.router.navigate(['/weather-app']);
+        break;
+      }
     }
-  }
-
-  productsList: Product[] = [];
-
-  constructor(private productsService: GetProductsService) {
-    this.expandSet = new Set<number>();
-  }
-
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  getData() {
-    this.productsService
-      .getProducts()
-      .subscribe((data: any) => (this.productsList = data['products']));
   }
 }

@@ -6,7 +6,7 @@ import { Product } from '../product';
 @Injectable({
   providedIn: 'root',
 })
-export class GetProductsService {
+export class ProductsService {
   apiEndpoint = 'https://dummyjson.com/products';
 
   constructor(private http: HttpClient) {}
